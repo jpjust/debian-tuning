@@ -45,6 +45,29 @@ Desative journal nas partições ext4 (a partição não pode estar montada):
 tune2fs -O ^has_journal /dev/sda2
 ```
 
+## Rotacionamento dos logs do journald
+
+Edite o arquivo `/etc/systemd/journald.conf` e adicione ou descomente a linha a seguir:
+
+```conf
+MaxRetentionSec=7day
+```
+
+Esta configuração limita os logs a 7 dias. É possível também configurar por tamanho. Veja os exemplos a seguir:
+
+```conf
+SystemMaxUse=200M
+SystemKeepFree=50M
+SystemMaxFileSize=50M
+MaxRetentionSec=1month
+```
+
+Decida sua configuração e reinicie o `journald`:
+
+```sh
+systemctl restart systemd-journald
+```
+
 ## Splash na inicialização com Plymouth
 
 ```sh
