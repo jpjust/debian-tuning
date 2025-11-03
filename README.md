@@ -2,7 +2,7 @@
 
 Opções recomendadas em `/etc/default/grub`:
 
-```
+```conf
 GRUB_CMDLINE_LINUX_DEFAULT="nouveau.nomodeset nvidia_drm.modeset=1 fsck.mode=auto fsck.repair=yes splash"
 ```
 
@@ -24,7 +24,7 @@ Adicione `noatime,nodiratime` nas opções das partições ext4 em `/etc/fstab` 
 
 Adicione pontos de montagem de diretórios temporários na memória RAM:
 
-```
+```conf
 # Temporarios
 tmpfs   /tmp       tmpfs   defaults,noatime,nodiratime,mode=1777   0  0
 tmpfs   /var/tmp   tmpfs   defaults,noatime,nodiratime,mode=1777   0  0
@@ -76,7 +76,7 @@ apt install plymouth*
 
 Configuração em `/etc/plymouth/plymouthd.conf`:
 
-```
+```conf
 [Daemon]
 Theme=bgrt
 ShowDelay=0
@@ -121,7 +121,7 @@ apt install mutter
 
 Edite `/etc/gdm3/daemon.conf` e ative o Wayland com a opção abaixo:
 
-```
+```conf
 [daemon]
 WaylandEnable=true
 ```
@@ -136,6 +136,6 @@ WaylandEnable=true
 
 Edite `/etc/nsswitch.conf` e adicione `mdns_minimal` na lista de busca:
 
-```
+```conf
 hosts:          files mdns_minimal [NOTFOUND=return] dns myhostname mymachines
 ```
