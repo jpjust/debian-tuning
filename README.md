@@ -3,11 +3,9 @@
 Opções recomendadas em `/etc/default/grub`:
 
 ```conf
-GRUB_CMDLINE_LINUX_DEFAULT="nouveau.nomodeset nvidia_drm.modeset=1 fsck.mode=auto fsck.repair=yes splash"
+GRUB_CMDLINE_LINUX_DEFAULT="fsck.mode=auto fsck.repair=yes splash"
 ```
 
-* `nouveau.nomodeset`: Desativa driver nouveau (se usar Nvidia proprietário)
-* `nvidia_drm.modeset=1`: Ativa o driver proprietario da Nvidia
 * `fsck.mode=auto`: fsck automático em caso de partição suja
 * `fsck.repair=yes`: fsck repara automaticamente qualquer erro
 * `splash`: Exibe tela de splash
@@ -17,6 +15,17 @@ GRUB_CMDLINE_LINUX_DEFAULT="nouveau.nomodeset nvidia_drm.modeset=1 fsck.mode=aut
 ```sh
 update-grub
 ```
+
+## Driver proprietário NVidia em sistemas híbridos
+
+Se tem um sistema híbrido com GPU NVidia+outra (como o caso do meu Nitro 5: NVidia+Radeon) instale o driver proprietário da NVidia e use o utilitário `nvidia-set.py` para trocar de drivers:
+
+```sh
+apt install nvidia-driver
+./nvidia-set.py 1
+```
+
+O parâmetro `1` habilita o driver da NVidia, bloqueando o driver open-source `nouveau`. Porém, com driver proprietário o Wayland não funciona bem. Se quiser usar o Wayland (ou se não for jogar nem usar a GPU pra nada), desabilite o driver proprietário com o parâmetro `0`. Este utilitário ajuda a não ter que ficar instalando e desinstalando o driver a todo momento.
 
 ## Tuning de acesso ao disco
 
